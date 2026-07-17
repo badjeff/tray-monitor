@@ -156,7 +156,7 @@
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(82, 30);
             this.label32.TabIndex = 45;
-            this.label32.Text = "Mbits/s";
+            this.label32.Text = "MB/s";
             // 
             // panel20
             // 

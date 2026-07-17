@@ -23,7 +23,7 @@ namespace NetIcon
             networkBorderText.Text = Utils.ColorToString(settings.borderColor);
             networkBorderOpacity.Value = settings.borderColor.A;
             networkInterval.Value = settings.updateInterval;
-            networkMaxBandwidth.Value = settings.maxBandwithBitPerSecond / 1024 / 1024;
+            networkMaxBandwidth.Value = settings.maxBandwithBitPerSecond / 8 / 1024 / 1024;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace NetIcon
             settings.backgroundColor = Utils.ColorFromString(networkBackgroundText.Text);
             settings.borderColor = Utils.ColorFromString(networkBorderText.Text);
             settings.updateInterval = (int)networkInterval.Value;
-            settings.maxBandwithBitPerSecond = (long)(networkMaxBandwidth.Value * 1024 * 1024);
+            settings.maxBandwithBitPerSecond = (long)(networkMaxBandwidth.Value * 1024 * 1024 * 8);
 
             Close();
         }

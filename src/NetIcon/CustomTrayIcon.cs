@@ -89,7 +89,7 @@ namespace NetIcon
             Color borderColor = settings.borderColor;
 
             int pointWidth = WidthSingleMeasurement();
-            long bandwidthMaxMbit = settings.maxBandwithBitPerSecond / 1024 / 1024;
+            long bandwidthMaxMB = settings.maxBandwithBitPerSecond / 8 / 1024 / 1024;
 
             int iconSize = GetTrayIconsSize();
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
@@ -98,8 +98,8 @@ namespace NetIcon
                 {
                     graphics.Clear(backgroundColor);
 
-                    float newValueMbit = GetNetworkLoad() * 8 / 1024 / 1024;
-                    measurementsPercents.Add(100 * newValueMbit / bandwidthMaxMbit);
+                    float newValueMB = GetNetworkLoad() / 1024 / 1024;
+                    measurementsPercents.Add(100 * newValueMB / bandwidthMaxMB);
                     if (measurementsPercents.Count > bitmap.Width / pointWidth)
                     {
                         measurementsPercents.RemoveAt(0);
@@ -116,9 +116,9 @@ namespace NetIcon
                     graphics.DrawRectangle(new Pen(borderColor, borderWidth), 0, 0, (int)bitmap.Width - borderWidth, (int)bitmap.Height - borderWidth);
 
                     graphics.Save();
-                    float averageBandwithMbit = measurementsPercents.Average() * bandwidthMaxMbit / 100;
+                    float averageBandwithMB = measurementsPercents.Average() * bandwidthMaxMB / 100;
                     int averageTime = measurementsPercents.Count * settings.updateInterval / 1000;
-                    string tooltip = String.Format("Network\nCurrent: {0:F0} Mbit/s\nAvg ({2}s): {1:F0} Mbit/s", newValueMbit, averageBandwithMbit, averageTime);
+                    string tooltip = String.Format("Network\nCurrent: {0:F0} MB/s\nAvg ({2}s): {1:F0} MB/s", newValueMB, averageBandwithMB, averageTime);
                     ChangeIcon(bitmap, tooltip);
                 }
             }
